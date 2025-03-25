@@ -1,9 +1,10 @@
-import React from 'react'
-
+import { Button } from "@/components/ui/button"
 
 const App = () => {
   return (
-    <div className="text-blue-500">App</div>
+    <div className="text-blue-500">
+      <Button>Click Me</Button>
+    </div>
   )
 }
 

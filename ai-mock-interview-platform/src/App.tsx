@@ -1,8 +1,14 @@
+import { BrowserRouter as Router , Routes , Route } from "react-router-dom"
+
 const App = () => {
   return (
-    <div className="text-blue-500">
-      
-    </div>
+    <Router>
+      <Routes>
+        {/* public routes */}
+        
+        {/* protected routes */}
+      </Routes>
+    </Router>
   )
 }
 

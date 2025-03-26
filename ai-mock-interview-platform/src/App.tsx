@@ -2,8 +2,8 @@ import { BrowserRouter as Router , Routes , Route } from "react-router-dom"
 import  PublicLayouts  from "@/layouts/PublicLayouts"
 import HomePage from "@/Routes/Home"
 import AuthenticationLayout from "@/layouts/AuthenticationLayout"
-import SignIn from "@/Routes/SignIn"
-import SignUp from "@/Routes/SignUp"
+import SignInPage from "@/Routes/SignIn"
+import SignUpPage from "@/Routes/SignUp"
 
 
 const App = () => {
@@ -16,8 +16,8 @@ const App = () => {
         </Route>
         {/* Authentication layouts */}
         <Route element={<AuthenticationLayout />}>
-          <Route path="/signin" element={<SignIn/>} />
-          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/signin/*" element={<SignInPage/>} />
+          <Route path="/signup/*" element={<SignUpPage/>} />
         </Route>
         {/* protected routes */}
       </Routes>

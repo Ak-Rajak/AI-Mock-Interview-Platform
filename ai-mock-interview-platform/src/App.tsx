@@ -5,7 +5,7 @@ import AuthenticationLayout from "@/layouts/AuthenticationLayout"
 import SignInPage from "@/Routes/SignIn"
 import SignUpPage from "@/Routes/SignUp"
 import ProtectedRoutes from "./layouts/ProtectedRoutesLayout"
-
+import MainLayouts from "./layouts/MainLayouts"
 
 const App = () => {
   return (
@@ -21,7 +21,8 @@ const App = () => {
           <Route path="/signup/*" element={<SignUpPage/>} />
         </Route>
         {/* protected routes */}
-      <Route element={<ProtectedRoutes><MainLayout/></ProtectedRoutes>}></Route>
+      <Route element={<ProtectedRoutes><MainLayouts/></ProtectedRoutes>}></Route>
+      </Routes>
     </Router>
   )
 }

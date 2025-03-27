@@ -12,8 +12,7 @@ const MainLayouts = () => {
             <main className="flex-grow">
                 <Outlet/>
             </main> 
-        </Containers>
-    
+        </Containers>    
         <Footer/>
     </div>
   )

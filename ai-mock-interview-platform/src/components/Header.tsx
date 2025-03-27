@@ -16,7 +16,7 @@ const Header = () => {
           {/* logo section */}
           <LogoContainer />
           {/* navigation section  */}
-          <nav className="hidden items-center md:flex gap-3">
+          <nav className="hidden md:flex items-center gap-3">
             <NavigationRoutes/>
           </nav>
           {/* profile section */}

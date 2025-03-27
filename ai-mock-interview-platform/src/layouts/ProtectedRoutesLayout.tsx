@@ -2,6 +2,8 @@
 // by accessing the user data using 'UseAuth' hook of cleck . And render the necessary components
 
 import { useAuth } from "@clerk/clerk-react"
+import LoaderPage from "@/Routes/Loaderpage";
+import { Navigate } from "react-router";
 
 const ProtectedRoutes = ({ children } : {children : React.ReactNode}) => {
     // useAuth return two parameters isLoaded (Data loaded) and isSignedIn (for signedin or not) 
@@ -13,9 +15,11 @@ const ProtectedRoutes = ({ children } : {children : React.ReactNode}) => {
     }
 
     // not signedIn , then show navigate to signin else replace
-     
+     if(!isSignedIn){
+        return <Navigate to={"/signin"} replace/>
+     }
 
-    return 
+    return children 
 }
 
-export default ProtectedRoutes
+export default ProtectedRoutes;

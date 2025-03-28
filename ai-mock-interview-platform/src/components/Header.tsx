@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@clerk/clerk-react";
 import Containers from "./Containers";
 import LogoContainer from "@/components/LogoContainer";
+import NavigationRoutes from "@/components/NavigationRoutes";
 
 const Header = () => {
   // Access the userId using useAuth() hook

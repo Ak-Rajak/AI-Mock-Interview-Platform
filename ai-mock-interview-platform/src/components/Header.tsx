@@ -3,6 +3,7 @@ import { useAuth } from "@clerk/clerk-react";
 import Containers from "./Containers";
 import LogoContainer from "@/components/LogoContainer";
 import NavigationRoutes from "@/components/NavigationRoutes";
+import { NavLink } from "react-router";
 
 const Header = () => {
   // Access the userId using useAuth() hook
@@ -18,9 +19,29 @@ const Header = () => {
           <LogoContainer />
           {/* navigation section  */}
           <nav className="hidden md:flex items-center gap-3">
-            <NavigationRoutes/>
+            <NavigationRoutes />
+            {/* If the user is authenticated then only render out the takeInterview nav */}
+            {userId && (
+              <NavLink
+                to={"/generate"}
+                className={({ isActive }) =>
+                  cn(
+                    "text-base text-neutral-600",
+                    isActive && "text-neutral-900 font-semibold"
+                  )
+                }
+              >
+                Take An Interview
+              </NavLink>
+            )}
           </nav>
-          {/* profile section */}
+          {/* profile */}
+          <div className="ml-auto flex items-center gap-6">
+            {/* <Profile section /> */}
+
+            {/* mobile toggle section */}
+
+          </div>
         </div>
       </Containers>
     </header>

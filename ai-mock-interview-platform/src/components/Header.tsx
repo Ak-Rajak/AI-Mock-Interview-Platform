@@ -4,6 +4,8 @@ import Containers from "./Containers";
 import LogoContainer from "@/components/LogoContainer";
 import NavigationRoutes from "@/components/NavigationRoutes";
 import { NavLink } from "react-router";
+import { ProfileContainer } from "./ProfileContainer";
+import { ToggleContainer } from "./ToggleContainer";
 
 const Header = () => {
   // Access the userId using useAuth() hook
@@ -38,9 +40,9 @@ const Header = () => {
           {/* profile */}
           <div className="ml-auto flex items-center gap-6">
             {/* <Profile section /> */}
-
+            <ProfileContainer />
             {/* mobile toggle section */}
-
+            <ToggleContainer/>
           </div>
         </div>
       </Containers>

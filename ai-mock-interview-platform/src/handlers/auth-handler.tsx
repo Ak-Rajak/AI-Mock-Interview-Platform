@@ -1,5 +1,8 @@
+import { db } from "@/config/firebase-config";
+import LoaderPage from "@/Routes/Loaderpage";
+import { User } from "@/types";
 import { useAuth, useUser } from "@clerk/clerk-react";
-import { Loader } from "lucide-react";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
@@ -21,6 +24,18 @@ export const AuthHandler = () => {
         try {
           const userSnap = await getDoc(doc(db, "users", user.id));
           if (!userSnap.exists()) {
+            const userData: User = {
+              id : user.id,
+              name: user.fullName || user.firstName || "Anonymous",
+              email: user.primaryEmailAddress?.emailAddress || "N/A",
+              imageUrl: user.imageUrl,
+              createdAt: serverTimestamp(),
+              updateAt: serverTimestamp(),
+            };
+
+            // Set data to firebase
+            await setDoc(doc(db, "users" , user.id) , userData);
+
           }
         } catch (error) {
           console.log("Error on storing the user data : ", error);
@@ -33,7 +48,7 @@ export const AuthHandler = () => {
 
   // Loading
   if (loading) {
-    return <Loader />;
+    return <LoaderPage />;
   }
 
   return null;

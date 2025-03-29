@@ -1,4 +1,7 @@
 import Containers from "@/components/Containers";
+import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
+import Marquee from "react-fast-marquee"
 
 const HomePage = () => {
   return (
@@ -38,15 +41,24 @@ const HomePage = () => {
           <div className="hidden md:block absolute w-80 bottom-4 right-4 px-4 py-2 rounded-md bg-white/60 backdrop-blur-md">
             <h2 className="text-neutral-800 font-semibold ">
               Developer
-              <p className="text-sm text-neutarl-500">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
-                quam dolor voluptatem aperiam rerum quibusdam delectus voluptas
-                suscipit error minima eveniet quisquam corrupti.
-              </p>
             </h2>
+            <p className="text-sm text-neutarl-500">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            </p>
+
+            <Button className="mt-3">
+              Generate <Sparkles/>
+            </Button>
           </div>
         </div>
       </Containers>
+
+      {/* margquee section */}
+      <div className=" w-full my-12">
+        <Marquee pauseOnHover>
+          <img src="" alt="Marquee Image" className="h-12 w-12 object-contain mx-2" />
+        </Marquee>
+      </div>
     </div>
   );
 };

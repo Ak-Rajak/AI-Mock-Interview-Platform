@@ -1,7 +1,8 @@
 import Containers from "@/components/Containers";
+import MarqueImg from "@/components/marquee-img";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
-import Marquee from "react-fast-marquee"
+import Marquee from "react-fast-marquee";
 
 const HomePage = () => {
   return (
@@ -39,15 +40,13 @@ const HomePage = () => {
           </div>
 
           <div className="hidden md:block absolute w-80 bottom-4 right-4 px-4 py-2 rounded-md bg-white/60 backdrop-blur-md">
-            <h2 className="text-neutral-800 font-semibold ">
-              Developer
-            </h2>
+            <h2 className="text-neutral-800 font-semibold ">Developer</h2>
             <p className="text-sm text-neutarl-500">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             </p>
 
             <Button className="mt-3">
-              Generate <Sparkles/>
+              Generate <Sparkles />
             </Button>
           </div>
         </div>
@@ -56,7 +55,14 @@ const HomePage = () => {
       {/* margquee section */}
       <div className=" w-full my-12">
         <Marquee pauseOnHover>
-          <img src="" alt="Marquee Image" className="h-12 w-12 object-contain mx-2" />
+          <MarqueImg img="assets/img/logo/firebase.png" />
+          <MarqueImg img="assets/img/logo/meet.png" />
+          <MarqueImg img="assets/img/logo/zoom.png" />
+          <MarqueImg img="assets/img/logo/firebase.png" />
+          <MarqueImg img="assets/img/logo/microsoft.png" />
+          <MarqueImg img="assets/img/logo/meet.png" />
+          <MarqueImg img="assets/img/logo/tailwindcss.png" />
+          <MarqueImg img="assets/img/logo/microsoft.png" />
         </Marquee>
       </div>
     </div>

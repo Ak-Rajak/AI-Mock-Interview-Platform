@@ -1,5 +1,4 @@
-import Containers from "@/components/Containers"
-
+import Containers from "@/components/Containers";
 
 const HomePage = () => {
   return (
@@ -13,13 +12,43 @@ const HomePage = () => {
             <span className="text-gray-500 font-extrabold">
               - A better way to
             </span>
-            <br /> 
+            <br />
             improve your interview chances and skills
           </h2>
+
+          <p className="mt-4 text-muted-foreground text-sm">
+            Boost your interview skills and increase you success rate with
+            AI-driven insights. Discover a smarter way to prepare, practise, and
+            stand out.
+          </p>
+        </div>
+
+        {/* Image section */}
+        <div className="w-full mt-4 rounded-xl bg-gray-100 h-[420px] drop-shadow-md overflow-hidden relative">
+          <img
+            src="assets/img/hero.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+
+          <div className="absolute top-4 px-4 py-2 rounded-md bg-white/40 backdrop-blur-md">
+            Inteviews Copilot&copy;
+          </div>
+
+          <div className="hidden md:block absolute w-80 bottom-4 right-4 px-4 py-2 rounded-md bg-white/60 backdrop-blur-md">
+            <h2 className="text-neutral-800 font-semibold ">
+              Developer
+              <p className="text-sm text-neutarl-500">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                quam dolor voluptatem aperiam rerum quibusdam delectus voluptas
+                suscipit error minima eveniet quisquam corrupti.
+              </p>
+            </h2>
+          </div>
         </div>
       </Containers>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

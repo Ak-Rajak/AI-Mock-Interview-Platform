@@ -35,7 +35,6 @@ export const AuthHandler = () => {
 
             // Set data to firebase
             await setDoc(doc(db, "users" , user.id) , userData);
-
           }
         } catch (error) {
           console.log("Error on storing the user data : ", error);
@@ -44,6 +43,8 @@ export const AuthHandler = () => {
         }
       }
     };
+
+    storeUserData();
   }, [isSignedIn, user, pathname, navigate]);
 
   // Loading

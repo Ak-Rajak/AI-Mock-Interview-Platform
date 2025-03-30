@@ -29,7 +29,9 @@ const App = () => {
           }
         >
           {/* All the protected routes will be here inside the mainlayout */}
-
+          <Route element={<Generate />}>
+            <Route index element={<Dashboard />}/>
+          </Route>
         </Route>
       </Routes>
     </Router>

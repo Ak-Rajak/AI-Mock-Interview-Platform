@@ -6,6 +6,8 @@ import SignInPage from "@/Routes/SignIn";
 import SignUpPage from "@/Routes/SignUp";
 import ProtectedRoutes from "./layouts/ProtectedRoutesLayout";
 import MainLayouts from "./layouts/MainLayouts";
+import { Generate } from "./components/Generate";
+import { Dashboard } from "./Routes/Dashboard";
 
 const App = () => {
   return (
@@ -29,7 +31,7 @@ const App = () => {
           }
         >
           {/* All the protected routes will be here inside the mainlayout */}
-          <Route element={<Generate />}>
+          <Route element={<Generate />} path="/generate">
             <Route index element={<Dashboard />}/>
           </Route>
         </Route>

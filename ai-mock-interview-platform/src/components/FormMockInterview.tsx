@@ -7,6 +7,7 @@ import { BreadcrumbPage } from "./ui/breadcrumb";
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 interface FormMockInterviewProps {
   initialData: Interview | null;
@@ -53,8 +54,19 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
     ? { title: "Updated..!", description: "Changes saved successfully..." }
     : { title: "Created..!", description: "New Mock Interview created..." };
 
-    // For subitting of form
-
+  // For subitting of form
+  const onSubmit = async (data: FormData) => {
+    try {
+        setLoading(true)
+    } catch (error) {
+      console.log(error);
+      toast.error("Error..", {
+        description: `Something went wrong. Please try again later`,
+      });
+    } finally {
+        setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (initialData) {
@@ -70,7 +82,7 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   return (
     <div className="w-full flex-col space-y-4">
       <CustomBreadCrum
-        breadCrumbPage={BreadcrumbPage}
+        breadCrumbPage={breadCrumbPage}
         breadCrumbItems={[{ label: "Mock Interview", link: "/generate" }]}
       />
     </div>

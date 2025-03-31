@@ -154,6 +154,30 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
 
           {/* Experience */}
 
+          <FormField
+            control={form.control}
+            name="experience"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="w-full flex items-center justify-between">
+                  <FormLabel>Years of Experience</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Input
+                    type="number"
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- 5 Years"
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {/* */}
             
 
         </form>

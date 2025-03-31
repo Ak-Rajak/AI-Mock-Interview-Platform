@@ -1,3 +1,4 @@
+import { FormMockInterview } from "@/components/FormMockInterview"
 import { db } from "@/config/firebase-config"
 import { Interview } from "@/types"
 import { doc, getDoc } from "firebase/firestore"
@@ -33,7 +34,7 @@ export const CreateEditPage = () => {
 
   return (
     <div className="my-4 flex-col w-full">
-        
+        <FormMockInterview initialData={interview}/>
     </div>
   )
 }

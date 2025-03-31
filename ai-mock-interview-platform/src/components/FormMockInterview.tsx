@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { Headings } from "./Headings";
 import { Button } from "./ui/button";
-import { Trash2 } from "lucide-react";
+import { Loader, Trash2 } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -42,7 +42,7 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   });
 
   // necessary states
-  const { isValid, isSubmitted } = form.formState;
+  const { isValid, isSubmitting } = form.formState;
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { userId } = useAuth();
@@ -201,6 +201,27 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
             )}
           />
             
+        {/* Button section */}
+        <div className="w-full flex items-center justify-end gap-6">
+            <Button type="reset"
+            size={"sm"}
+            variant={"outline"}
+            disabled={isSubmitting || loading}>
+                Reset
+            </Button>
+
+            <Button
+              type="submit"
+              size={"sm"}
+              disabled={isSubmitting || !isValid || loading}
+            >
+              {loading ? (
+                <Loader className="text-gray-50 animate-spin" />
+              ) : (
+                actions
+              )}
+            </Button>
+        </div>
 
         </form>
       </FormProvider>

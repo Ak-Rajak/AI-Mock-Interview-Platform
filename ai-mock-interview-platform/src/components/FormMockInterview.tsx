@@ -1,13 +1,18 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { Interview } from "@/types";
 import { CustomBreadCrum } from "./CustomBreadCrum";
-import { BreadcrumbPage } from "./ui/breadcrumb";
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { Headings } from "./Headings";
+import { Button } from "./ui/button";
+import { Trash2 } from "lucide-react";
+import { Separator } from "./ui/separator";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
 
 interface FormMockInterviewProps {
   initialData: Interview | null;
@@ -57,14 +62,14 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   // For subitting of form
   const onSubmit = async (data: FormData) => {
     try {
-        setLoading(true)
+      setLoading(true);
     } catch (error) {
       console.log(error);
       toast.error("Error..", {
         description: `Something went wrong. Please try again later`,
       });
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -85,6 +90,43 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
         breadCrumbPage={breadCrumbPage}
         breadCrumbItems={[{ label: "Mock Interview", link: "/generate" }]}
       />
+
+      <div className="mt-4 flex items-center justify-between w-full">
+        <Headings title={title} isSubHeading />
+
+        {initialData && (
+          <Button size={"icon"} variant={"ghost"}>
+            <Trash2 className="min-w-4 min-h-4 text-red-500" />
+          </Button>
+        )}
+      </div>
+
+      <Separator className="my-4" />
+
+      <div className="my-6"></div>
+
+      <FormProvider {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full p-8 rounded-lg flex-col flex items-start justify-start gap-6 shadow-md"
+        >
+            <FormField
+            control={form.control}
+            name="position"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="w-full flex items-center justify-between">
+                  <FormLabel>Job Role / Job Position</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                    <Input disabled={loading} className="h-12" placeholder="eg: Full Stack Developer"/>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </form>
+      </FormProvider>
     </div>
   );
 };

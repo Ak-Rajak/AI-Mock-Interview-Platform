@@ -13,6 +13,7 @@ import { Trash2 } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 interface FormMockInterviewProps {
   initialData: Interview | null;
@@ -120,11 +121,41 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
                   <FormMessage className="text-sm" />
                 </div>
                 <FormControl>
-                    <Input disabled={loading} className="h-12" placeholder="eg: Full Stack Developer"/>
+                    <Input disabled={loading} className="h-12" placeholder="eg: Full Stack Developer" 
+                    {...field} value={field.value || ""}/>
                 </FormControl>
               </FormItem>
             )}
           />
+
+            {/* Description  */}
+
+            <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="w-full flex items-center justify-between">
+                  <FormLabel>Job Description</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Textarea
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- describle your job role"
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {/* Experience */}
+
+            
+
         </form>
       </FormProvider>
     </div>

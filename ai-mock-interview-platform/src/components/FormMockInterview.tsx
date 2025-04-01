@@ -21,6 +21,8 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { chatSession } from "@/scripts";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/config/firebase-config";
 
 interface FormMockInterviewProps {
   initialData: Interview | null;
@@ -125,8 +127,19 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
         if (isValid) {
           // A function generateAiresponse
           const aiResult = await generateAiResponse(data);
+
+          await addDoc(collection(db, "interviews"), {
+            ...data,
+            userId,
+            question: aiResult,
+            createdAt: serverTimestamp(),
+          });
+
+          toast.success(toastMessage.title, { description: toastMessage.description});
         }
       }
+
+      navigate("/generate" , {replace: true});
     } catch (error) {
       console.log(error);
       toast.error("Error..", {

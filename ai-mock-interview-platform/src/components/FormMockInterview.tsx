@@ -64,6 +64,7 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   const onSubmit = async (data: FormData) => {
     try {
       setLoading(true);
+      console.log(data);
     } catch (error) {
       console.log(error);
       toast.error("Error..", {

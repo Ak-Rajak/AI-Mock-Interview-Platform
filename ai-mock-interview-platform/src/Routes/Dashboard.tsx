@@ -1,10 +1,40 @@
 import { Headings } from "@/components/Headings";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { db } from "@/config/firebase-config";
+import { useAuth } from "@clerk/clerk-react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { Plus } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 
 export const Dashboard = () => {
+  // State to store the interviewId
+  const [interviews , setInterviews] = useState<Interview[]>([])
+  const [loading , setloading] = useState(false)
+  const{ userId} = useAuth();
+
+  // Fetch the interviews from the database
+  useEffect(() => {
+    // Query function for database
+    const interviewQuery = query(
+      collection(db, "interviews"),
+      where("userId", "==", userId)
+    );
+
+    const unSubscribe = onSnapshot(
+      interviewQuery,
+      (snapshot) => {
+        const interviewList: Interview[] = snapshot.docs.map((doc) => ({
+          
+        })
+      }
+    )
+
+
+  }, [userId]);
+
+
   return (
     <>
     <div className="flex w-full items-center justify-between">

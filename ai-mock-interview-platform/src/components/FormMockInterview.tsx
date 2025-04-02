@@ -21,7 +21,7 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { chatSession } from "@/scripts";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 
 interface FormMockInterviewProps {
@@ -122,6 +122,17 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
       setLoading(true);
       if (initialData) {
         // update interview data
+        if (isValid){
+          const aiResult = await generateAiResponse(data);
+
+          await updateDoc(doc(db, "inetviews" , initialData?.id), {
+            questions: aiResult, 
+            ...data,
+            updateAt: serverTimestamp(),
+          }).catch((error) => console.log(error));
+          //toast message
+          toast.success(toastMessage.title, { description: toastMessage.description});
+        }
       } else {
         // create new interview data
         if (isValid) {

@@ -68,6 +68,9 @@ export const Dashboard = () => {
     </div>
     <Separator className="my-8"/>
     {/* content section */}
+
+    <div className="md:grid md:grid-cols-3 gap-3 py-4">
+    </div>
     </>
   );
 };

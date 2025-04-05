@@ -76,9 +76,11 @@ export const Dashboard = () => {
           ))
         ) : interviews.length > 0 ? (
           interviews.map((interview) => (
-            <p key={interview.id}>{interview.position}</p>
+            // InterviewPin component to display interview details
+            <InterviewPin key={interview.id} interview={interview} />
           ))
         ) : (
+          // No data found section
           <div className="md:col-span-3 w-full flex flex-grow items-center justify-center h-96 flex-col">
             <img src="/assets/svg/not-found.svg" alt="" className="w-44 h-44 object-contain"/>
 

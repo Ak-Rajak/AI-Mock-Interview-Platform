@@ -48,8 +48,13 @@ export const InterviewPin = ({
           {`${new Date(interview.createdAt.toDate()).toLocaleDateString(
             "en-US" , 
             {dateStyle: "long"}
-          )}`}
+          )} - ${new Date(interview.createdAt.toDate()).toLocaleTimeString("en-US" , {timeStyle:"short"})}`}
         </p>
+
+        {/* Action button */}
+        {!onMockPage && (
+          <div className="flex items-center justify-center"></div>
+        )}
       </CardFooter>
     </Card>
   );

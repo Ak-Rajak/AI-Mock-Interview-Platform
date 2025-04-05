@@ -41,8 +41,16 @@ export const InterviewPin = ({
         ))}
       </div>
       <CardFooter className={cn(
-        "w-full flex items-center p-0"
-      )}></CardFooter>
+        "w-full flex items-center p-0",
+        onMockPage ? "justify-end" : "justify-between"
+      )}>
+        <p className="text-[12px] text-muted-foreground truncate whitespace-nowrap ">
+          {`${new Date(interview.createdAt.toDate()).toLocaleDateString(
+            "en-US" , 
+            {dateStyle: "long"}
+          )}`}
+        </p>
+      </CardFooter>
     </Card>
   );
 };

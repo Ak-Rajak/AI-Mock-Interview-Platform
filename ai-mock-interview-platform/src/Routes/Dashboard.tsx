@@ -1,4 +1,5 @@
 import { Headings } from "@/components/Headings";
+import { InterviewPin } from "@/components/InterviewPin";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";

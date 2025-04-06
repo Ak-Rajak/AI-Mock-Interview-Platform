@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface QuestionSectionProps{
     questions: {question : string ; answer : string }[];
@@ -13,6 +14,8 @@ export const QuestionSection = ({ questions } : QuestionSectionProps) => {
     const[currentSpeech , setCurrentSpeech] = useState<SpeechSynthesisUtterance | null>(null);
 
   return (
-    <div>QuestionSection</div>
+    <div className="w-full min-h-96 border rounded-md p-4">
+        
+    </div>
   )
 }

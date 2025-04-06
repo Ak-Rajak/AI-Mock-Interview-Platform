@@ -125,7 +125,7 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
         if (isValid){
           const aiResult = await generateAiResponse(data);
 
-          await updateDoc(doc(db, "inetviews" , initialData?.id), {
+          await updateDoc(doc(db, "interviews" , initialData?.id), {
             questions: aiResult, 
             ...data,
             updateAt: serverTimestamp(),
@@ -142,7 +142,7 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
           await addDoc(collection(db, "interviews"), {
             ...data,
             userId,
-            question: aiResult,
+            questions: aiResult,
             createdAt: serverTimestamp(),
           });
 

@@ -7,6 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 import { Lightbulb } from "lucide-react";
+import { QuestionSection } from "@/components/QuestionSection";
 
 export const MockInterviewPage = () => {
   const { interviewId } = useParams<{ interviewId: string }>();
@@ -68,7 +69,7 @@ export const MockInterviewPage = () => {
       <Alert className="bg-sky-100 border border-sky-200 p-4 rounded-lg flex items-start gap-3 -mt-3">
         <Lightbulb className="h-5 w-5 text-sky-600" />
         <div>
-          <AlertTitle>Important Infomation</AlertTitle>
+          <AlertTitle className="text-sky-800 font-semibold">Important Note</AlertTitle>
           <AlertDescription className="text-sm text-sky-700 mt-1 leading-relaxed">
             Please enable your webcam and microphone to start the AI-generated
             mock interview. The interview consists of five questions. You’ll
@@ -82,6 +83,14 @@ export const MockInterviewPage = () => {
         </div>
       </Alert>
       </div>
+
+        {/* Mock interview question section  */}
+        {interview?.questions && interview?.questions.length > 0 && (
+            <div className="mt-4 w-full flex flex-col items-start gap-4">
+                <QuestionSection questions={interview?.questions}/>
+            </div>
+        )}
+
     </div>
   );
 };

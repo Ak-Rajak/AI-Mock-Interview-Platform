@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { TooltipButton } from "./TooltipButton";
 import { Volume2, VolumeX } from "lucide-react";
+import { RecordAnswer } from "./RecordAnswer";
 
 interface QuestionSectionProps {
   questions: { question: string; answer: string }[];
@@ -26,6 +27,7 @@ export const QuestionSection = ({ questions }: QuestionSectionProps) => {
             setCurrentSpeech(null);
         } else {
             if("speechSynthesis" in window) {
+                // get the speech and speak
                 const speech = new SpeechSynthesisUtterance(qst);
                 window.speechSynthesis.speak(speech);
                 setIsPlaying(true);
@@ -80,6 +82,12 @@ export const QuestionSection = ({ questions }: QuestionSectionProps) => {
                 onClick={() => handlePlayQuestion(tab.question)}
               />
             </div>
+
+            <RecordAnswer 
+             question={tab}
+             isWebCam={isWebCam}
+             setIsWebCam={setIsWebCam}/>
+
           </TabsContent>
         ))}
       </Tabs>

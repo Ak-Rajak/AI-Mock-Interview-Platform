@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import LoaderPage from "./Loaderpage";
 import { CustomBreadCrum } from "@/components/CustomBreadCrum";
 import { Button } from "@/components/ui/button";
-import { Lightbulb, Sparkle, Sparkles, WebcamIcon } from "lucide-react";
+import { Lightbulb, Sparkles, WebcamIcon } from "lucide-react";
 import { InterviewPin } from "@/components/InterviewPin";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import WebCam from "react-webcam";

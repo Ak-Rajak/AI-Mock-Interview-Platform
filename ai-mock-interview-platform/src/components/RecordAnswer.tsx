@@ -3,6 +3,11 @@ import { useState } from "react";
 import useSpeechToText from "react-hook-speech-to-text";
 import { useParams } from "react-router";
 
+interface AIResponse {
+  rating: number;
+  feedback: string;
+}
+
 interface RecordAnswerProps {
   question: { question: string; answer: string };
   isWebCam: boolean;
@@ -37,7 +42,7 @@ export const RecordAnswer = ({
   const {interviewId} = useParams();
 
 
-  
+
 
 
   return <div>RecordAnswer</div>;

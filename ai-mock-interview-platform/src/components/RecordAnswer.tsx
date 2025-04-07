@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { TooltipButton } from "./TooltipButton";
 import { toast } from "sonner";
+import { P } from "node_modules/@clerk/clerk-react/dist/useAuth-B4ONnC0C.d.mts";
 
 interface AIResponse {
   rating: number;
@@ -84,7 +85,7 @@ export const RecordAnswer = ({
       .map((result) => result.transcript)
       .join("");
 
-    setUserAnswer(combineTranscripts)
+    setUserAnswer(combineTranscripts);
   }, [results]);
 
   return (
@@ -138,6 +139,22 @@ export const RecordAnswer = ({
           icon={<RefreshCw className="min-w-5 min-h-5" />}
           onClick={recordNewAnswer}
         />
+      </div>
+
+      {/* Answer record section */}
+      <div className="w-full mt-4 p-4 border rounded-md bg-gray-50">
+          <h2 className="text-lg font-semibold">Your Answer:</h2>
+
+          <p className="text-sm mt-2 text-gray-700 whitespace-normal">
+            {userAnswer || "Start recording to see your answer here"}
+          </p>
+
+          {interimResult && (
+            <p className="test-sm text-gray-500 mt-2">
+              <strong>Current Speech:</strong>
+              {interimResult}
+            </p>
+          )}
       </div>
     </div>
   );

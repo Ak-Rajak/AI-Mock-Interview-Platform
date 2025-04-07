@@ -3,8 +3,9 @@ import WebCam from "react-webcam";
 import { useState } from "react";
 import useSpeechToText from "react-hook-speech-to-text";
 import { useParams } from "react-router";
-import { CircleStop, Mic, Video, VideoOff, WebcamIcon } from "lucide-react";
+import { CircleStop, Mic, RefreshCw, Video, VideoOff, WebcamIcon } from "lucide-react";
 import { TooltipButton } from "./TooltipButton";
+import { toast } from "sonner";
 
 interface AIResponse {
   rating: number;
@@ -44,7 +45,31 @@ export const RecordAnswer = ({
   const { userId } = useAuth();
   const { interviewId } = useParams();
 
-  const recordUserAnswer = () => {}
+  // Recording the answer of the user function 
+  const recordUserAnswer = async() => {
+    if (isRecording) {
+      stopSpeechToText();
+
+      if(userAnswer?.length < 30) {
+        toast.error("Error", {
+          description: "Your answer should be more than 30 characters",
+        });
+        return; 
+      }
+
+      // Ai result is used to save
+    
+    } else {
+      startSpeechToText();
+    }
+  };
+
+  // Record New Answer function 
+  const recordNewAnswer = () => {
+    setUserAnswer("");
+    stopSpeechToText();
+    startSpeechToText();
+  }
 
 
   return (
@@ -73,7 +98,7 @@ export const RecordAnswer = ({
             isWebCam ? (
               <VideoOff className="min-w-5 min-h-5" />
             ) : (
-              <Video className="min-w-5 min -h-5" />
+              <Video className="min-w-5 min-h-5" />
             )
           }
           onClick={() => setIsWebCam(!isWebCam)}
@@ -86,10 +111,17 @@ export const RecordAnswer = ({
             isRecording ? (
               <CircleStop className="min-w-5 min-h-5" />
             ) : (
-              <Mic className="min-w-5 min -h-5" />
+              <Mic className="min-w-5 min-h-5" />
             )
           }
           onClick={recordUserAnswer}
+        />
+
+        {/* Record Again button */}
+        <TooltipButton
+          content={isRecording ? "Stop Recording" : "Start Recording"}
+          icon={<RefreshCw className="min-w-5 min-h-5"/>}
+          onClick={recordNewAnswer}
         />
       </div>
     </div>

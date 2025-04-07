@@ -16,6 +16,7 @@ import {
 import { TooltipButton } from "./TooltipButton";
 import { toast } from "sonner";
 import { P } from "node_modules/@clerk/clerk-react/dist/useAuth-B4ONnC0C.d.mts";
+import { chatSession } from "@/scripts";
 
 interface AIResponse {
   rating: number;
@@ -68,8 +69,69 @@ export const RecordAnswer = ({
       }
 
       // Ai result is used to save
+      const aiResult = await generateResult (
+        question.question,
+        question.answer,
+        userAnswer
+      );
+
+      // Store the results 
+      console.log(aiResult);
+      setAiResult(aiResult);
     } else {
       startSpeechToText();
+    }
+  };
+
+  // CleanResponse 
+  const cleanAiResponse = (responseText: string) => {
+    // Step 1 : trim any surrounding whitespace
+    let cleanText = responseText.trim();
+
+    // Step 2: Remove any occurrences of "json" or code block symbols (``` or `)
+    cleanText = cleanText.replace(/(json|```|`)/g, "");
+
+
+    // Step 3: Parse the clean JSON text into an array of objects
+    try {
+      return JSON.parse(cleanText);
+    } catch (error) {
+      throw new Error("Invalid JSON format: " + (error as Error)?.message);
+    }
+  };
+
+  // Function to generate AI result
+  const generateResult = async (
+    qst : string,
+    qstAns: string,
+    userAns: string
+  ) : Promise<AIResponse> => {
+    setIsAIGenerating(true);
+    const prompt = `
+      Question: "${qst}"
+      User Answer: "${userAns}"
+      Correct Answer: "${qstAns}"
+      Please compare the user's answer to the correct answer, and provide a rating (from 1 to 10) based on answer quality, and offer feedback for improvement.
+      Return the result in JSON format with the fields "ratings" (number) and "feedback" (string).
+    `;
+
+    // Here we will get the ai response using the chat session within try-catch block 
+    try {
+      //Here is chatsession 
+      const aiResult = await chatSession.sendMessage(prompt); 
+      // Clean the response to get the data
+      const parsedResult:AIResponse = cleanAiResponse(aiResult.response.text());
+      return parsedResult;
+
+
+    } catch (error) {
+      console.log(error);
+      toast("Error" , {
+        description: "AN error occured while genearting feedback.",
+      });
+      return {rating: 0, feedback: "Unable to generate feedback"};
+    } finally {
+      setIsAIGenerating(false);
     }
   };
 
@@ -150,7 +212,8 @@ export const RecordAnswer = ({
           ) : (
             <Save className="min-w-5 min-h-5" />
           )}
-          onClick={recordNewAnswer}
+          onClick={() => setOpen(!open)}
+          disabled={!aiResult}
         />
       </div>
 

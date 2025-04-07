@@ -5,8 +5,10 @@ import useSpeechToText, { ResultType } from "react-hook-speech-to-text";
 import { useParams } from "react-router";
 import {
   CircleStop,
+  Loader,
   Mic,
   RefreshCw,
+  Save,
   Video,
   VideoOff,
   WebcamIcon,
@@ -139,22 +141,33 @@ export const RecordAnswer = ({
           icon={<RefreshCw className="min-w-5 min-h-5" />}
           onClick={recordNewAnswer}
         />
+
+        {/* Save Button Answer */}
+        <TooltipButton
+          content="Save Result"
+          icon={isAIGenerating ? (
+            <Loader className="min-w-5 min-h-5 animate-spin"/>
+          ) : (
+            <Save className="min-w-5 min-h-5" />
+          )}
+          onClick={recordNewAnswer}
+        />
       </div>
 
       {/* Answer record section */}
       <div className="w-full mt-4 p-4 border rounded-md bg-gray-50">
-          <h2 className="text-lg font-semibold">Your Answer:</h2>
+        <h2 className="text-lg font-semibold">Your Answer:</h2>
 
-          <p className="text-sm mt-2 text-gray-700 whitespace-normal">
-            {userAnswer || "Start recording to see your answer here"}
+        <p className="text-sm mt-2 text-gray-700 whitespace-normal">
+          {userAnswer || "Start recording to see your answer here"}
+        </p>
+
+        {interimResult && (
+          <p className="test-sm text-gray-500 mt-2">
+            <strong>Current Speech:</strong>
+            {interimResult}
           </p>
-
-          {interimResult && (
-            <p className="test-sm text-gray-500 mt-2">
-              <strong>Current Speech:</strong>
-              {interimResult}
-            </p>
-          )}
+        )}
       </div>
     </div>
   );

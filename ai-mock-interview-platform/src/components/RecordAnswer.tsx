@@ -1,9 +1,16 @@
 import { useAuth } from "@clerk/clerk-react";
 import WebCam from "react-webcam";
-import { useState } from "react";
-import useSpeechToText from "react-hook-speech-to-text";
+import { useEffect, useState } from "react";
+import useSpeechToText, { ResultType } from "react-hook-speech-to-text";
 import { useParams } from "react-router";
-import { CircleStop, Mic, RefreshCw, Video, VideoOff, WebcamIcon } from "lucide-react";
+import {
+  CircleStop,
+  Mic,
+  RefreshCw,
+  Video,
+  VideoOff,
+  WebcamIcon,
+} from "lucide-react";
 import { TooltipButton } from "./TooltipButton";
 import { toast } from "sonner";
 
@@ -45,32 +52,40 @@ export const RecordAnswer = ({
   const { userId } = useAuth();
   const { interviewId } = useParams();
 
-  // Recording the answer of the user function 
-  const recordUserAnswer = async() => {
+  // Recording the answer of the user function
+  const recordUserAnswer = async () => {
     if (isRecording) {
       stopSpeechToText();
 
-      if(userAnswer?.length < 30) {
+      if (userAnswer?.length < 30) {
         toast.error("Error", {
           description: "Your answer should be more than 30 characters",
         });
-        return; 
+        return;
       }
 
       // Ai result is used to save
-    
     } else {
       startSpeechToText();
     }
   };
 
-  // Record New Answer function 
+  // Record New Answer function
   const recordNewAnswer = () => {
     setUserAnswer("");
     stopSpeechToText();
     startSpeechToText();
-  }
+  };
 
+  // For collecting the data , when we click on mic option , it need to combine all transcription
+  useEffect(() => {
+    const combineTranscripts = results
+      .filter((result): result is ResultType => typeof result !== "string")
+      .map((result) => result.transcript)
+      .join("");
+
+    setUserAnswer(combineTranscripts)
+  }, [results]);
 
   return (
     <div className="w-full flex flex-col items-center gap-8 mt-4">
@@ -120,7 +135,7 @@ export const RecordAnswer = ({
         {/* Record Again button */}
         <TooltipButton
           content={isRecording ? "Stop Recording" : "Start Recording"}
-          icon={<RefreshCw className="min-w-5 min-h-5"/>}
+          icon={<RefreshCw className="min-w-5 min-h-5" />}
           onClick={recordNewAnswer}
         />
       </div>

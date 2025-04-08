@@ -9,21 +9,41 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-
-interface ModalProps {
-    title : string,
-    description : string,
-    isOpen : boolean , 
-    isClose : () => void,
-    children ?: React.ReactNode
+interface ModelProps {
+  title: string;
+  description: string;
+  isOpen: boolean;
+  isClose: () => void;
+  children?: React.ReactNode;
 }
 
-import React from 'react'
+import React from "react";
+import { Button } from "./ui/button";
 
-export const Model = ( {} : ModelProps) => {
+export const Model = ({
+  title,
+  description,
+  isOpen,
+  isClose,
+  children,
+}: ModelProps) => {
+    const onChange = ( open : boolean) => {
+        if(!open){
+            isClose();
+        }
+    }
+
   return (
-    <div>Model</div>
-  )
-}
-
-
+    <Dialog open={isOpen} onOpenChange={onChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>
+            {description}
+          </DialogDescription>
+        </DialogHeader>
+        <div className="">{children}</div>
+      </DialogContent>
+    </Dialog>
+  );
+};

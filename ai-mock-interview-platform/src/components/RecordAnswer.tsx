@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { chatSession } from "@/scripts";
 import { SaveModel } from "./SaveModel";
 import { findSourceMap } from "module";
-import { addDoc, collection, getDoc, serverTimestamp, where } from "firebase/firestore";
+import { addDoc, collection, getDoc, getDocs, query, serverTimestamp, where } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 
 interface AIResponse {

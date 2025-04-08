@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { TooltipButton } from "./TooltipButton";
 import { toast } from "sonner";
-import { P } from "node_modules/@clerk/clerk-react/dist/useAuth-B4ONnC0C.d.mts";
 import { chatSession } from "@/scripts";
 
 interface AIResponse {

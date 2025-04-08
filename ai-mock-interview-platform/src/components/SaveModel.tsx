@@ -1,4 +1,5 @@
-import React from "react";
+import { Model } from "./Model";
+import { Button } from "./ui/button";
 
 interface SaveModelProps {
   isOpen: boolean;
@@ -13,5 +14,14 @@ export const SaveModel = ({
   onConfirm,
   loading,
 }: SaveModelProps) => {
-  return <div>SaveModel</div>;
+  <Model
+    title="Are you sure ?"
+    description="Thsi action cannot be undone by you can't edit or re-answer thsi question again!"
+    isOpen={isOpen}
+    onClose={onClose}
+  >
+    <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+      <Button disabled={loading} className="bg-emerald-600 hover:bg-emerald-800" onClick={onConfirm} >Continue</Button>
+    </div>
+  </Model>;
 };

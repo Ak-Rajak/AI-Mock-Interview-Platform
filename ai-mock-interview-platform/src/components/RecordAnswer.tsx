@@ -18,7 +18,8 @@ import { toast } from "sonner";
 import { chatSession } from "@/scripts";
 import { SaveModel } from "./SaveModel";
 import { findSourceMap } from "module";
-import { collection, getDoc, where } from "firebase/firestore";
+import { addDoc, collection, getDoc, serverTimestamp, where } from "firebase/firestore";
+import { db } from "@/config/firebase-config";
 
 interface AIResponse {
   rating: number;
@@ -169,13 +170,24 @@ export const RecordAnswer = ({
           });
           return ;
         } else {
-          
+          // save the user answer
+
+          await addDoc(collection(db, "userAnswers") , {
+            mockIdRef: interviewId,
+            question: question.question,
+            correct_ans: question.answer,
+            user_ans: userAnswer,
+            feedback: aiResult.feedback,
+            rating: aiResult.rating,
+            userId,
+            createdAt: serverTimestamp(),
+          });
+
+          toast("Saved" , {description: "Your answer has been saved.. "});
         }
-
-
-
-
-
+        
+        setUserAnswer("");
+        stopSpeechToText();
     } catch (error) {
       toast("Error", {
         description: "An error occured while generating the feedback."

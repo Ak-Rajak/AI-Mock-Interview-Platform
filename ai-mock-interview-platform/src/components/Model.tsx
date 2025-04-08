@@ -18,7 +18,6 @@ interface ModelProps {
 }
 
 import React from "react";
-import { Button } from "./ui/button";
 
 export const Model = ({
   title,

@@ -16,6 +16,9 @@ import {
 import { TooltipButton } from "./TooltipButton";
 import { toast } from "sonner";
 import { chatSession } from "@/scripts";
+import { SaveModel } from "./SaveModel";
+import { findSourceMap } from "module";
+import { collection, getDoc, where } from "firebase/firestore";
 
 interface AIResponse {
   rating: number;
@@ -68,13 +71,13 @@ export const RecordAnswer = ({
       }
 
       // Ai result is used to save
-      const aiResult = await generateResult (
+      const aiResult = await generateResult(
         question.question,
         question.answer,
         userAnswer
       );
 
-      // Store the results 
+      // Store the results
       console.log(aiResult);
       setAiResult(aiResult);
     } else {
@@ -82,14 +85,13 @@ export const RecordAnswer = ({
     }
   };
 
-  // CleanResponse 
+  // CleanResponse
   const cleanAiResponse = (responseText: string) => {
     // Step 1 : trim any surrounding whitespace
     let cleanText = responseText.trim();
 
     // Step 2: Remove any occurrences of "json" or code block symbols (``` or `)
     cleanText = cleanText.replace(/(json|```|`)/g, "");
-
 
     // Step 3: Parse the clean JSON text into an array of objects
     try {
@@ -101,10 +103,10 @@ export const RecordAnswer = ({
 
   // Function to generate AI result
   const generateResult = async (
-    qst : string,
+    qst: string,
     qstAns: string,
     userAns: string
-  ) : Promise<AIResponse> => {
+  ): Promise<AIResponse> => {
     setIsAIGenerating(true);
     const prompt = `
       Question: "${qst}"
@@ -114,21 +116,21 @@ export const RecordAnswer = ({
       Return the result in JSON format with the fields "ratings" (number) and "feedback" (string).
     `;
 
-    // Here we will get the ai response using the chat session within try-catch block 
+    // Here we will get the ai response using the chat session within try-catch block
     try {
-      //Here is chatsession 
-      const aiResult = await chatSession.sendMessage(prompt); 
+      //Here is chatsession
+      const aiResult = await chatSession.sendMessage(prompt);
       // Clean the response to get the data
-      const parsedResult:AIResponse = cleanAiResponse(aiResult.response.text());
+      const parsedResult: AIResponse = cleanAiResponse(
+        aiResult.response.text()
+      );
       return parsedResult;
-
-
     } catch (error) {
       console.log(error);
-      toast("Error" , {
+      toast("Error", {
         description: "AN error occured while genearting feedback.",
       });
-      return {rating: 0, feedback: "Unable to generate feedback"};
+      return { rating: 0, feedback: "Unable to generate feedback" };
     } finally {
       setIsAIGenerating(false);
     }
@@ -140,6 +142,51 @@ export const RecordAnswer = ({
     stopSpeechToText();
     startSpeechToText();
   };
+  // This is used for saving the user answer into the database 
+  const saveUserAnswer = async () => {
+    setLoading(true);
+    // If not ai result generated then return
+    if (!aiResult){
+      return;
+    }
+
+    // For current question 
+    const currentQuestion = question.question;
+    try {
+        // query the firebase to check if the user answer alreadhy exists or not
+        const userAnswerQuery = query(
+          collection(db , "userAnswer"),
+          where("userId" , "==" ,currentQuestion),
+          where("question" , "==" ,currentQuestion)
+        ); 
+
+        const querySnap = await getDocs(userAnswerQuery);
+        // If the user already answer the question don't save it 
+        if (!querySnap.empty) {
+          console.log("Query Sanp Size" , querySnap.size);
+          toast.info("Already Answered" , {
+            description: "You have already answered this question"
+          });
+          return ;
+        } else {
+          
+        }
+
+
+
+
+
+    } catch (error) {
+      toast("Error", {
+        description: "An error occured while generating the feedback."
+      });
+      console.log(error);
+    }finally {
+      setLoading(false)
+    }
+  }
+
+
 
   // For collecting the data , when we click on mic option , it need to combine all transcription
   useEffect(() => {
@@ -154,6 +201,7 @@ export const RecordAnswer = ({
   return (
     <div className="w-full flex flex-col items-center gap-8 mt-4">
       {/* Save Modal */}
+      <SaveModel isOpen={open} onClose={() => setOpen(false)} onConfirm={saveUserAnswer} loading={loading} />
 
       {/* WebCam  */}
       <div className="w-full h-[400px] md:w-96 flex flex-col items-center justify-center border p-4 bg-gray-50 rounded-md">
@@ -206,11 +254,13 @@ export const RecordAnswer = ({
         {/* Save Button Answer */}
         <TooltipButton
           content="Save Result"
-          icon={isAIGenerating ? (
-            <Loader className="min-w-5 min-h-5 animate-spin"/>
-          ) : (
-            <Save className="min-w-5 min-h-5" />
-          )}
+          icon={
+            isAIGenerating ? (
+              <Loader className="min-w-5 min-h-5 animate-spin" />
+            ) : (
+              <Save className="min-w-5 min-h-5" />
+            )
+          }
           onClick={() => setOpen(!open)}
           disabled={!aiResult}
         />

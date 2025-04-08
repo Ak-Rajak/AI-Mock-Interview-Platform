@@ -13,7 +13,7 @@ interface ModelProps {
   title: string;
   description: string;
   isOpen: boolean;
-  isClose: () => void;
+  onClose: () => void;
   children?: React.ReactNode;
 }
 
@@ -24,12 +24,12 @@ export const Model = ({
   title,
   description,
   isOpen,
-  isClose,
+  onClose,
   children,
 }: ModelProps) => {
     const onChange = ( open : boolean) => {
         if(!open){
-            isClose();
+            onClose();
         }
     }
 

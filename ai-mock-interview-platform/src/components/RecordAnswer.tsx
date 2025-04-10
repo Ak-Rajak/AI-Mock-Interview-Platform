@@ -172,7 +172,7 @@ export const RecordAnswer = ({
         } else {
           // save the user answer
 
-          await addDoc(collection(db, "userAnswers") , {
+          const questionAnswerRef = await addDoc(collection(db, "userAnswers") , {
             mockIdRef: interviewId,
             question: question.question,
             correct_ans: question.answer,

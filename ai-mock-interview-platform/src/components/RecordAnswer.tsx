@@ -186,7 +186,9 @@ export const RecordAnswer = ({
           toast("Saved" , {description: "Your answer has been saved.. "});
         }
         
+        // Save the AI result to the database
         setUserAnswer("");
+        // Stop the speech to text
         stopSpeechToText();
     } catch (error) {
       toast("Error", {
@@ -197,7 +199,6 @@ export const RecordAnswer = ({
       setLoading(false)
     }
   }
-
 
 
   // For collecting the data , when we click on mic option , it need to combine all transcription

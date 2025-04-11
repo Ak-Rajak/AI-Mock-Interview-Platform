@@ -134,6 +134,7 @@ export const RecordAnswer = ({
       return { rating: 0, feedback: "Unable to generate feedback" };
     } finally {
       setIsAIGenerating(false);
+      setOpen(!open);
     }
   };
 

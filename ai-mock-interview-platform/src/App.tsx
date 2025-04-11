@@ -11,6 +11,7 @@ import { Dashboard } from "./Routes/Dashboard";
 import { CreateEditPage } from "./Routes/CreateEditPage";
 import { MockLoadPage } from "./Routes/MockLoadPage";
 import { MockInterviewPage } from "./Routes/MockInterviewPage";
+import { FeedBack } from "./Routes/FeedBack";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
             <Route path=":interviewId" element={<CreateEditPage />}/>
             <Route path="interview/:interviewId" element={<MockLoadPage />}/>
             <Route path="interview/:interviewId/start" element={<MockInterviewPage />}/>
+            <Route path="feedback/:interviewId" element={<FeedBack/>}/>
           </Route>
         </Route>
       </Routes>

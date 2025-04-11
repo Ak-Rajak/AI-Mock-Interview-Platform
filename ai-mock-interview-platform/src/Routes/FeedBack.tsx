@@ -2,7 +2,6 @@ import { Interview, UserAnswer } from '@/types';
 import { useAuth } from '@clerk/clerk-react';
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router';
-import { string } from 'zod';
 
 export const FeedBack = () => {
     const { interviewId } = useParams<{InterviewId : string}>();

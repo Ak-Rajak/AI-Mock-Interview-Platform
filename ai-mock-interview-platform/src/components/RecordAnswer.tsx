@@ -148,7 +148,7 @@ export const RecordAnswer = ({
   const saveUserAnswer = async () => {
     setLoading(true);
     // If not ai result generated then return
-    if (!aiResult){
+    if (!aiResult || aiResult.rating === undefined){
       return;
     }
 

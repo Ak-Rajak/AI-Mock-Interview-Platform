@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+
 interface ModelProps {
   title: string;
   description: string;

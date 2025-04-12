@@ -16,7 +16,7 @@ export const SaveModel = ({
 }: SaveModelProps) => {
   <Model
     title="Are you sure ?"
-    description="Thsi action cannot be undone by you can't edit or re-answer thsi question again!"
+    description="This action cannot be undone by you can't edit or re-answer this question again!"
     isOpen={isOpen}
     onClose={onClose}
   >

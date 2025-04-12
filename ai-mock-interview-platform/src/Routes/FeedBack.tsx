@@ -78,7 +78,7 @@ export const FeedBack = () => {
       fetchInterview();
       fetchFeedbacks();
     }
-  }, []);
+  }, [interviewId,navigate,userId]);
 
   return <div>FeedBack</div>;
 };

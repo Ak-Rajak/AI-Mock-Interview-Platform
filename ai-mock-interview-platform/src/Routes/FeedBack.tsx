@@ -10,9 +10,10 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
+import LoaderPage from "./Loaderpage";
 
 export const FeedBack = () => {
   const { interviewId } = useParams<{ InterviewId: string }>();
@@ -79,6 +80,23 @@ export const FeedBack = () => {
       fetchFeedbacks();
     }
   }, [interviewId,navigate,userId]);
+
+  // Calucate the ratings for the feedback out of 10 , using UseMemo hook
+  const overAllRating = useMemo(() => {
+    if (feedbacks.length === 0) return "0.0";
+
+    const totalRatings = feedbacks.reduce(
+      (acc, feedback) => acc + feedback.rating,
+      0
+    );
+
+    return (totalRatings / feedbacks.length).toFixed(1);
+  } , [feedbacks])
+
+  if(isLoading){
+    return <LoaderPage className="w-full h-[70vh]" />
+  }
+
 
   return <div>FeedBack</div>;
 };

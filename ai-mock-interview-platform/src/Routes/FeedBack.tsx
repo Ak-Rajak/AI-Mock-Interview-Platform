@@ -14,6 +14,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import LoaderPage from "./Loaderpage";
+import { CustomBreadCrum } from "@/components/CustomBreadCrum";
+import { Headings } from "@/components/Headings";
 
 export const FeedBack = () => {
   const { interviewId } = useParams<{ InterviewId: string }>();
@@ -79,7 +81,7 @@ export const FeedBack = () => {
       fetchInterview();
       fetchFeedbacks();
     }
-  }, [interviewId,navigate,userId]);
+  }, [interviewId, navigate, userId]);
 
   // Calucate the ratings for the feedback out of 10 , using UseMemo hook
   const overAllRating = useMemo(() => {
@@ -91,12 +93,32 @@ export const FeedBack = () => {
     );
 
     return (totalRatings / feedbacks.length).toFixed(1);
-  } , [feedbacks])
+  }, [feedbacks]);
 
-  if(isLoading){
-    return <LoaderPage className="w-full h-[70vh]" />
+  if (isLoading) {
+    return <LoaderPage className="w-full h-[70vh]" />;
   }
 
+  return (
+    <div className="flex flex-col w-full gap-8 py-5">
+      {/* This is for the breadcrum  */}
+      <div className="flex items-center justify-between w-full gap-2">
+        <CustomBreadCrum
+          breadCrumbPage={"Feedback"}
+          breadCrumbItems={[
+            { label: "Mock Interviews", link: "/generate" },
+            {
+              label: `${interview?.position}`,
+              link: `/generate/interview/${interview?.id}`,
+            },
+          ]}
+        />
+      </div>
 
-  return <div>FeedBack</div>;
+      <Headings
+        title="Congratulations !"
+        description="Your personalized feedback is now available. Dive in to see your strengths, areas for improvement, and tips to help you ace your next interview."
+      />
+    </div>
+  );
 };

@@ -17,6 +17,15 @@ import LoaderPage from "./Loaderpage";
 import { CustomBreadCrum } from "@/components/CustomBreadCrum";
 import { Headings } from "@/components/Headings";
 import { InterviewPin } from "@/components/InterviewPin";
+// Accrodion
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { cn } from "@/lib/utils";
+
 
 export const FeedBack = () => {
   const { interviewId } = useParams<{ InterviewId: string }>();
@@ -131,6 +140,25 @@ export const FeedBack = () => {
       {interview && <InterviewPin interview={interview} onMockPage />}
 
       <Headings title="Interview Feedback" isSubHeading />
+
+      {feedbacks && (
+        <Accordion type="single" collapsible className="space-y-6">
+          {feedbacks.map((feed) => (
+            <AccordionItem key={feed.id} value={feed.id} 
+            className="border rounded-lg shadow-md">
+              <AccordionTrigger 
+                onClick={()=> setActiveFeed(feed.id)}
+                className={cn("px-5 py-3 items-center justify-between text-base rounded-t-lg trasition-colors hover:no-underline", 
+                  activeFeed === feed.id ? "bg-gradient-to-r from-purple-50 to-blue-50 " : "hover:bg-gray-50"
+                )}>
+                <span>{feed.question}</span>
+              </AccordionTrigger>
+
+              
+            </AccordionItem>
+          ))}
+        </Accordion>
+      )}
     </div>
   );
 };

@@ -25,6 +25,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { cn } from "@/lib/utils";
+import { CircleCheck, Star } from "lucide-react";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 
 
 export const FeedBack = () => {
@@ -154,7 +156,24 @@ export const FeedBack = () => {
                 <span>{feed.question}</span>
               </AccordionTrigger>
 
-              
+              {/* Accordion content for the feedback */}
+              <AccordionContent className="px-5 py-6 bg-white rounded-b-lg space-y-5 shadow-inner">
+                <div className="text-lg font-semibold to-gray-700">
+                  <Star/>
+                  Ratings: {feed.rating}
+                </div>
+
+                <Card className="border-none space-y-3 p-4 bg-green-50 rounded-lg shadow-md">
+                  <CardTitle className="flex items-center text-lg">
+                    <CircleCheck className="mr-2 text-green-600"/>
+                    Expected Answer
+                  </CardTitle>
+
+                  <CardDescription className="">
+                    {feed.correct_ans}
+                  </CardDescription>
+                </Card>
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import LoaderPage from "./Loaderpage";
 import { CustomBreadCrum } from "@/components/CustomBreadCrum";
 import { Headings } from "@/components/Headings";
+import { InterviewPin } from "@/components/InterviewPin";
 
 export const FeedBack = () => {
   const { interviewId } = useParams<{ InterviewId: string }>();
@@ -119,6 +120,17 @@ export const FeedBack = () => {
         title="Congratulations !"
         description="Your personalized feedback is now available. Dive in to see your strengths, areas for improvement, and tips to help you ace your next interview."
       />
+
+      <p className="">
+        Your overall interview ratings:{" "}
+        <span className="text-emerald-500 font-semibold text-xl">
+          {overAllRating} / 10{" "}
+        </span>
+      </p>
+
+      {interview && <InterviewPin interview={interview} onMockPage />}
+
+      <Headings title="Interview Feedback" isSubHeading />
     </div>
   );
 };

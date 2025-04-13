@@ -23,11 +23,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { CircleCheck, Star } from "lucide-react";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-
 
 export const FeedBack = () => {
   const { interviewId } = useParams<{ InterviewId: string }>();
@@ -146,31 +145,62 @@ export const FeedBack = () => {
       {feedbacks && (
         <Accordion type="single" collapsible className="space-y-6">
           {feedbacks.map((feed) => (
-            <AccordionItem key={feed.id} value={feed.id} 
-            className="border rounded-lg shadow-md">
-              <AccordionTrigger 
-                onClick={()=> setActiveFeed(feed.id)}
-                className={cn("px-5 py-3 items-center justify-between text-base rounded-t-lg trasition-colors hover:no-underline", 
-                  activeFeed === feed.id ? "bg-gradient-to-r from-purple-50 to-blue-50 " : "hover:bg-gray-50"
-                )}>
+            <AccordionItem
+              key={feed.id}
+              value={feed.id}
+              className="border rounded-lg shadow-md"
+            >
+              <AccordionTrigger
+                onClick={() => setActiveFeed(feed.id)}
+                className={cn(
+                  "px-5 py-3 items-center justify-between text-base rounded-t-lg trasition-colors hover:no-underline",
+                  activeFeed === feed.id
+                    ? "bg-gradient-to-r from-purple-50 to-blue-50 "
+                    : "hover:bg-gray-50"
+                )}
+              >
                 <span>{feed.question}</span>
               </AccordionTrigger>
 
               {/* Accordion content for the feedback */}
               <AccordionContent className="px-5 py-6 bg-white rounded-b-lg space-y-5 shadow-inner">
                 <div className="text-lg font-semibold to-gray-700">
-                  <Star/>
+                  <Star />
                   Ratings: {feed.rating}
                 </div>
 
+                {/* Question link  */}
                 <Card className="border-none space-y-3 p-4 bg-green-50 rounded-lg shadow-md">
                   <CardTitle className="flex items-center text-lg">
-                    <CircleCheck className="mr-2 text-green-600"/>
+                    <CircleCheck className="mr-2 text-green-600" />
                     Expected Answer
                   </CardTitle>
 
                   <CardDescription className="">
                     {feed.correct_ans}
+                  </CardDescription>
+                </Card>
+
+                {/* this user answer section  */}
+                <Card className="border-none space-y-3 p-4 bg-green-50 rounded-lg shadow-md">
+                  <CardTitle className="flex items-center text-lg">
+                    <CircleCheck className="mr-2 text-yellow-600" />
+                    Your Answer
+                  </CardTitle>
+
+                  <CardDescription className="">
+                    {feed.user_ans}
+                  </CardDescription>
+                </Card>
+
+                <Card className="border-none space-y-3 p-4 bg-green-50 rounded-lg shadow-md">
+                  <CardTitle className="flex items-center text-lg">
+                    <CircleCheck className="mr-2 text-red-600" />
+                    Feedback
+                  </CardTitle>
+
+                  <CardDescription className="">
+                    {feed.feedback}
                   </CardDescription>
                 </Card>
               </AccordionContent>

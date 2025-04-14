@@ -28,7 +28,7 @@ import { CircleCheck, Star } from "lucide-react";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 
 export const FeedBack = () => {
-  const { interviewId } = useParams<{ InterviewId: string }>();
+  const { interviewId } = useParams<{ interviewId: string }>();
   const [interview, setInterview] = useState<Interview | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [feedbacks, setFeedbacks] = useState<UserAnswer[]>([]);
@@ -41,7 +41,7 @@ export const FeedBack = () => {
   }
 
   useEffect(() => {
-    if (!interviewId) {
+    if (interviewId) {
       // Function for fetching the interview data
       const fetchInterview = async () => {
         if (interviewId) {
@@ -66,7 +66,7 @@ export const FeedBack = () => {
         setIsLoading(true);
         try {
           const querySnapRef = query(
-            collection(db, "userAnswer"),
+            collection(db, "userAnswers"),
             where("mockIdRef", "==", interviewId),
             where("userId", "==", userId)
           );
@@ -131,7 +131,7 @@ export const FeedBack = () => {
       />
 
       <p className="">
-        Your overall interview ratings:{" "}
+        Your overall interview ratings :{" "}
         <span className="text-emerald-500 font-semibold text-xl">
           {overAllRating} / 10{" "}
         </span>
@@ -141,7 +141,7 @@ export const FeedBack = () => {
 
       <Headings title="Interview Feedback" isSubHeading />
 
-      {feedbacks && (
+      {feedbacks && feedbacks.length > 0 ? (
         <Accordion type="single" collapsible className="space-y-6">
           {feedbacks.map((feed) => (
             <AccordionItem
@@ -175,30 +175,30 @@ export const FeedBack = () => {
                     Expected Answer
                   </CardTitle>
 
-                  <CardDescription className="">
+                  <CardDescription className="font-medium text-gray-700">
                     {feed.correct_ans}
                   </CardDescription>
                 </Card>
 
                 {/* this user answer section  */}
-                <Card className="border-none space-y-3 p-4 bg-green-50 rounded-lg shadow-md">
+                <Card className="border-none space-y-3 p-4 bg-yellow-50 rounded-lg shadow-md">
                   <CardTitle className="flex items-center text-lg">
                     <CircleCheck className="mr-2 text-yellow-600" />
                     Your Answer
                   </CardTitle>
 
-                  <CardDescription className="">
+                  <CardDescription className="font-medium text-gray-700">
                     {feed.user_ans}
                   </CardDescription>
                 </Card>
 
-                <Card className="border-none space-y-3 p-4 bg-green-50 rounded-lg shadow-md">
+                <Card className="border-none space-y-3 p-4 bg-red-50 rounded-lg shadow-md">
                   <CardTitle className="flex items-center text-lg">
                     <CircleCheck className="mr-2 text-red-600" />
                     Feedback
                   </CardTitle>
 
-                  <CardDescription className="">
+                  <CardDescription className="font-medium text-gray-700">
                     {feed.feedback}
                   </CardDescription>
                 </Card>
@@ -206,6 +206,15 @@ export const FeedBack = () => {
             </AccordionItem>
           ))}
         </Accordion>
+      ) : (
+        <div className="flex flex-col items-center justify-center p-8 border rounded-lg bg-gray-50">
+          <p className="text-lg font-medium text-gray-600 mb-2">
+            No feedback found
+          </p>
+          <p className="text-sm text-gray-500">
+            Complete the interview to see your feedback here.
+          </p>
+        </div>
       )}
     </div>
   );

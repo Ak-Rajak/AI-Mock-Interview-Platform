@@ -18,7 +18,15 @@ import { toast } from "sonner";
 import { chatSession } from "@/scripts";
 import { SaveModel } from "./SaveModel";
 import { findSourceMap } from "module";
-import { addDoc, collection, getDoc, getDocs, query, serverTimestamp, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 
 interface AIResponse {
@@ -114,7 +122,7 @@ export const RecordAnswer = ({
       User Answer: "${userAns}"
       Correct Answer: "${qstAns}"
       Please compare the user's answer to the correct answer, and provide a rating (from 1 to 10) based on answer quality, and offer feedback for improvement.
-      Return the result in JSON format with the fields "ratings" (number) and "feedback" (string).
+      Return the result in JSON format with the fields "rating" (number) and "feedback" (string).
     `;
 
     // Here we will get the ai response using the chat session within try-catch block
@@ -129,12 +137,11 @@ export const RecordAnswer = ({
     } catch (error) {
       console.log(error);
       toast("Error", {
-        description: "AN error occured while genearting feedback.",
+        description: "An error occured while generating feedback.",
       });
       return { rating: 0, feedback: "Unable to generate feedback" };
     } finally {
       setIsAIGenerating(false);
-      setOpen(!open);
     }
   };
 
@@ -144,70 +151,70 @@ export const RecordAnswer = ({
     stopSpeechToText();
     startSpeechToText();
   };
-  // This is used for saving the user answer into the database 
+  // This is used for saving the user answer into the database
   const saveUserAnswer = async () => {
     setLoading(true);
     // If not ai result generated then return
-    if (!aiResult || aiResult.rating === undefined){
+    if (!aiResult) {
       return;
     }
 
-    // For current question 
+    // For current question
     const currentQuestion = question.question;
     try {
-        // query the firebase to check if the user answer alreadhy exists or not
-        const userAnswerQuery = query(
-          collection(db , "userAnswer"),
-          where("userId" , "==" ,currentQuestion),
-          where("question" , "==" ,currentQuestion)
-        ); 
+      // query the firebase to check if the user answer alreadhy exists or not
+      const userAnswerQuery = query(
+        collection(db, "userAnswers"),
+        where("userId", "==", userId),
+        where("question", "==", currentQuestion)
+      );
 
-        const querySnap = await getDocs(userAnswerQuery);
-        // If the user already answer the question don't save it 
-        if (!querySnap.empty) {
-          console.log("Query Sanp Size" , querySnap.size);
-          toast.info("Already Answered" , {
-            description: "You have already answered this question"
-          });
-          return ;
-        } else {
-          // save the user answer into database 
+      const querySnap = await getDocs(userAnswerQuery);
+      // If the user already answer the question don't save it
+      if (!querySnap.empty) {
+        console.log("Query Sanp Size", querySnap.size);
+        toast.info("Already Answered", {
+          description: "You have already answered this question",
+        });
+        return;
+      } else {
+        // save the user answer into database
 
-          const questionAnswerRef = await addDoc(collection(db, "userAnswers") , {
-            mockIdRef: interviewId,
-            question: question.question,
-            correct_ans: question.answer,
-            user_ans: userAnswer,
-            feedback: aiResult.feedback,
-            rating: aiResult.rating,
-            userId,
-            createdAt: serverTimestamp(),
-          });
+        await addDoc(collection(db, "userAnswers"), {
+          mockIdRef: interviewId,
+          question: question.question,
+          correct_ans: question.answer,
+          user_ans: userAnswer,
+          feedback: aiResult.feedback,
+          rating: aiResult.rating,
+          userId,
+          createdAt: serverTimestamp(),
+        });
 
-          toast("Saved" , {description: "Your answer has been saved.. "});
-        }
-        
-        // Save the AI result to the database
-        setUserAnswer("");
-        // Stop the speech to text
-        stopSpeechToText();
+        toast("Saved", { description: "Your answer has been saved.. " });
+      }
+
+      // Save the AI result to the database
+      setUserAnswer("");
+      // Stop the speech to text
+      stopSpeechToText();
     } catch (error) {
       toast("Error", {
-        description: "An error occured while generating the feedback."
+        description: "An error occured while generating the feedback.",
       });
       console.log(error);
-    }finally {
-      setLoading(false)
+    } finally {
+      setLoading(false);
+      setOpen(!open);
     }
-  }
-
+  };
 
   // For collecting the data , when we click on mic option , it need to combine all transcription
   useEffect(() => {
     const combineTranscripts = results
       .filter((result): result is ResultType => typeof result !== "string")
       .map((result) => result.transcript)
-      .join("");
+      .join(" ");
 
     setUserAnswer(combineTranscripts);
   }, [results]);
@@ -215,7 +222,12 @@ export const RecordAnswer = ({
   return (
     <div className="w-full flex flex-col items-center gap-8 mt-4">
       {/* Save Modal */}
-      <SaveModel isOpen={open} onClose={() => setOpen(false)} onConfirm={saveUserAnswer} loading={loading} />
+      <SaveModel
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={saveUserAnswer}
+        loading={loading}
+      />
 
       {/* WebCam  */}
       <div className="w-full h-[400px] md:w-96 flex flex-col items-center justify-center border p-4 bg-gray-50 rounded-md">

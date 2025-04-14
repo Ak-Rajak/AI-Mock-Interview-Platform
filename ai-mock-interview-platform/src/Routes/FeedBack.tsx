@@ -1,7 +1,6 @@
 import { db } from "@/config/firebase-config";
 import { Interview, UserAnswer } from "@/types";
 import { useAuth } from "@clerk/clerk-react";
-import { Description } from "@radix-ui/react-dialog";
 import {
   collection,
   doc,

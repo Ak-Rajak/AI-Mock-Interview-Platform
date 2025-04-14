@@ -2,7 +2,7 @@ import { db } from "@/config/firebase-config";
 import { Interview } from "@/types";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import LoaderPage from "./Loaderpage";
 import { CustomBreadCrum } from "@/components/CustomBreadCrum";
 import { Button } from "@/components/ui/button";

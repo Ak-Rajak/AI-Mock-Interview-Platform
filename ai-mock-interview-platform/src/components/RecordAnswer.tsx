@@ -17,11 +17,9 @@ import { TooltipButton } from "./TooltipButton";
 import { toast } from "sonner";
 import { chatSession } from "@/scripts";
 import { SaveModel } from "./SaveModel";
-import { findSourceMap } from "module";
 import {
   addDoc,
   collection,
-  getDoc,
   getDocs,
   query,
   serverTimestamp,
@@ -46,7 +44,6 @@ export const RecordAnswer = ({
   setIsWebCam,
 }: RecordAnswerProps) => {
   const {
-    error,
     interimResult,
     isRecording,
     results,

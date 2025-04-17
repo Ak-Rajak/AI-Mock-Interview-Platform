@@ -1,5 +1,6 @@
 import { FieldValue, Timestamp } from "firebase/firestore";
 
+// This type is defined for the user object in the database
 export interface User{
     id : string;
     name : string ;

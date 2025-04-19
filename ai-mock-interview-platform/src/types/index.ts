@@ -23,6 +23,7 @@ export interface Interview{
     updatedAt: Timestamp; 
 }
 
+// This type is defined for the mock interview UserAnswer object type
 export interface UserAnswer {
     id : string;
     mockIdRef : string;

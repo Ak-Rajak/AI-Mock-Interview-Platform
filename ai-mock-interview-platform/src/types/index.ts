@@ -1,5 +1,6 @@
 import { FieldValue, Timestamp } from "firebase/firestore";
 
+// This is the type file for safety check 
 // This type is defined for the user object in the database
 export interface User{
     id : string;

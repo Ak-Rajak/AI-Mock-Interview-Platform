@@ -11,7 +11,7 @@ export interface User{
     updateAt: Timestamp | FieldValue;
 }
 
-// This type is defined for the mock interview object in the database , interview
+// This type is defined for the mock interview object in the database of interview
 export interface Interview{
     id: string;
     position : string;

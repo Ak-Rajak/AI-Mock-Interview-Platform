@@ -111,3 +111,27 @@ pnpm run dev
 
 5. **Open your browser**
 Navigate to `http://localhost:5173`
+
+## 📁 Project Structure
+
+```
+ai-mock-interview-platform/
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── ui/             # Shadcn UI components
+│   │   ├── FormMockInterview.tsx
+│   │   ├── RecordAnswer.tsx
+│   │   └── ...
+│   ├── Routes/             # Page components
+│   │   ├── Dashboard.tsx
+│   │   ├── MockInterviewPage.tsx
+│   │   ├── FeedBack.tsx
+│   │   └── ...
+│   ├── layouts/            # Layout components
+│   ├── config/             # Configuration files
+│   ├── scripts/            # AI integration scripts
+│   ├── types/              # TypeScript type definitions
+│   └── utils/              # Utility functions
+├── public/                 # Static assets
+└── ...
+```

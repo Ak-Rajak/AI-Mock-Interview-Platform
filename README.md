@@ -155,3 +155,56 @@ ai-mock-interview-platform/
 2. **Rating System**: 1-10 performance scores
 3. **Improvement Tips**: AI-generated suggestions
 4. **Progress History**: Track improvement over time
+
+
+## 🚀 Deployment
+
+### Firebase Hosting
+```bash
+# Build the project
+pnpm run build
+
+# Deploy to Firebase
+firebase deploy
+```
+
+### Vercel (Alternative)
+```bash
+# Install Vercel CLI
+pnpm add -g vercel
+
+# Deploy
+vercel
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Google Gemini AI** for intelligent answer analysis
+- **Clerk** for seamless authentication
+- **Firebase** for reliable backend services
+- **Shadcn UI** for beautiful, accessible components
+- **Lucide React** for stunning icons
+
+## 📞 Contact
+
+- **Project Link**: [https://github.com/Ak-Rajak/AI-Mock-Interview-Platform](https://github.com/Ak-rajak/AI-Mock-Interview-Platform)
+- **Live Demo**: [https://ai-interview-project-react.web.app](https://ai-interview-project-react.web.app)
+
+---
+
+<div align="center">
+  <p>Made with ❤️ for better interview preparation</p>
+  <p>⭐ Star this repo if you found it helpful!</p>
+</div>

@@ -48,3 +48,16 @@ An intelligent, AI-powered interview preparation platform that helps you practic
 - 📱 Mobile-first approach
 - 🌙 Clean and intuitive interface
 - ⚡ Lightning-fast performance
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| **Frontend** | React 18, TypeScript, Vite |
+| **Styling** | Tailwind CSS, Shadcn UI |
+| **Authentication** | Clerk |
+| **Database** | Firebase Firestore |
+| **AI Integration** | Google Gemini AI |
+| **Speech Recognition** | Web Speech API |
+| **Deployment** | Firebase Hosting |
+| **Package Manager** | pnpm |

@@ -135,3 +135,23 @@ ai-mock-interview-platform/
 ├── public/                 # Static assets
 └── ...
 ```
+
+## 🔥 Features in Detail
+
+### Interview Creation Flow
+1. **Job Details**: Enter position, description, experience level
+2. **Tech Stack**: Specify technologies you'll be interviewed on
+3. **AI Generation**: Gemini AI creates personalized questions
+4. **Review & Edit**: Modify questions before starting
+
+### Interview Experience
+1. **Webcam Setup**: Optional video recording
+2. **Voice Recording**: Speech-to-text answer capture
+3. **Real-time Feedback**: Instant AI analysis
+4. **Progress Tracking**: Save and review answers
+
+### Feedback System
+1. **Detailed Analysis**: Question-by-question breakdown
+2. **Rating System**: 1-10 performance scores
+3. **Improvement Tips**: AI-generated suggestions
+4. **Progress History**: Track improvement over time

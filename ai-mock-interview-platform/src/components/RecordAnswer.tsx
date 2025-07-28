@@ -126,10 +126,10 @@ export const RecordAnswer = ({
     try {
       //Here is chatsession
       const aiResult = await chatSession.sendMessage(prompt);
+      const responseText = aiResult.response.text();
+      console.log("AI Response:", responseText);
       // Clean the response to get the data
-      const parsedResult: AIResponse = cleanAiResponse(
-        aiResult.response.text()
-      );
+      const parsedResult: AIResponse = cleanAiResponse(responseText);
       return parsedResult;
     } catch (error) {
       console.log(error);
@@ -186,6 +186,7 @@ export const RecordAnswer = ({
           rating: aiResult.rating,
           userId,
           createdAt: serverTimestamp(),
+          updateDoc: serverTimestamp(),
         });
 
         toast("Saved", { description: "Your answer has been saved.. " });

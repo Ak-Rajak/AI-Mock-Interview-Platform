@@ -37,3 +37,4 @@ export interface UserAnswer {
     createdAt: Timestamp;
     updateAt: Timestamp;
 }
+

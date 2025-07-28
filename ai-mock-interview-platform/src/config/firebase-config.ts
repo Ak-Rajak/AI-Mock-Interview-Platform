@@ -11,7 +11,7 @@ const firebaseConfig = {
   };
 
 // Access app which we created over the firebase console otherwise create a new app using this firebase configuration.
-const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 // make the instance of db from firebase
 const db = getFirestore(app);

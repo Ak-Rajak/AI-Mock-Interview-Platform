@@ -24,3 +24,27 @@ An intelligent, AI-powered interview preparation platform that helps you practic
 - 📝 Customize interview questions
 - ⚙️ AI preferences configuration
 - 🏷️ Technology stack selection
+
+### 3️⃣ **AI-Powered Analysis**
+- 🤖 Intelligent answer evaluation using **Google Gemini AI**
+- 📊 Performance ratings (1-10 scale)
+- 💡 Personalized improvement suggestions
+- 🎯 Technical accuracy assessment
+
+### 4️⃣ **Speech-to-Text Feedback**
+- 🎤 Voice recording capabilities
+- 📝 Real-time speech-to-text conversion
+- 🔄 Re-record answers functionality
+- 💬 Instant AI feedback generation
+
+### 5️⃣ **Real-Time Database**
+- 🔥 **Firebase Firestore** for data storage
+- 📈 User progress tracking
+- 🔄 Real-time synchronization
+- 💾 Secure data persistence
+
+### 6️⃣ **Beautiful UI**
+- 🎨 Modern, responsive design with **Shadcn UI**
+- 📱 Mobile-first approach
+- 🌙 Clean and intuitive interface
+- ⚡ Lightning-fast performance

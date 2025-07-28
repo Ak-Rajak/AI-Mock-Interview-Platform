@@ -61,3 +61,53 @@ An intelligent, AI-powered interview preparation platform that helps you practic
 | **Speech Recognition** | Web Speech API |
 | **Deployment** | Firebase Hosting |
 | **Package Manager** | pnpm |
+
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- pnpm package manager
+- Firebase account
+- Google AI Studio account (for Gemini API)
+- Clerk account
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/AI-Mock-Interview-Platform.git
+cd AI-Mock-Interview-Platform/ai-mock-interview-platform
+```
+
+2. **Install dependencies**
+```bash
+pnpm install
+```
+
+3. **Environment Setup**
+Create a `.env.local` file in the root directory:
+```env
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+
+# Google Gemini AI
+VITE_GEMINI_API_KEY=your_gemini_api_key
+
+# Clerk Authentication
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+```
+
+4. **Run the development server**
+```bash
+pnpm run dev
+```
+
+5. **Open your browser**
+Navigate to `http://localhost:5173`

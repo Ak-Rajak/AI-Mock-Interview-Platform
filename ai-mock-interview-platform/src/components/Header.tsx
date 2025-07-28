@@ -21,7 +21,7 @@ const Header = () => {
           <LogoContainer />
           {/* navigation section  */}
           <nav className="hidden md:flex items-center gap-3">
-            <NavigationRoutes />
+            <NavigationRoutes isMobile={false} />
             
             {/* If the user is authenticated then only render out the takeInterview nav */}
             {userId && (

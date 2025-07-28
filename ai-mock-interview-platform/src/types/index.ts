@@ -16,7 +16,7 @@ export interface Interview{
     id: string;
     position : string;
     description : string;
-    experience : string;
+    experience : number;
     userId: string;
     techStack : string;
     questions: {questions: string; answer: string}[];

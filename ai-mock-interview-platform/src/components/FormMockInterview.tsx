@@ -47,7 +47,19 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   // This is the schema for the form validsation
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {},
+    defaultValues: initialData ? {
+      description: initialData.description || "",
+      position: initialData.position || "",
+      experience: typeof initialData.experience === 'string' 
+        ? parseInt(initialData.experience, 10) || 0 
+        : initialData.experience || 0,
+      techStack: initialData.techStack || "",
+    } : {
+      description: "",
+      position: "",
+      experience: 0,
+      techStack: "",
+    },
   });
 
   // necessary states
